@@ -7,7 +7,8 @@ totalData = list()
 while True:
     rawData = pd.read_json("https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json")
     totalData.append(rawData)
-    if str(datetime.today()).split(" ")[0] == str(initDate + timedelta(minutes = 2)).split(" ")[0]:
+    print(datetime.today())
+    if str(datetime.today()).split(" ")[0] == str(initDate + timedelta(days = 1)).split(" ")[0]:
         totalData = pd.concat(totalData, axis = 0).drop_duplicates()
         totalData.to_excel(f"{str(datetime.today())}.xlsx", index = None)
         initDate = datetime.today()
